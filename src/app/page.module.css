@@ -1,0 +1,84 @@
+.page {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f4ff;
+}
+
+.wrapper {
+    padding: 1rem;
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.logo img {
+    border-radius: 1.7rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.1rem;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.container {
+    gap: 1.5rem;
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.card {
+    width: 300px;
+    flex: 1 1 300px;
+    padding: 1.5rem;
+    max-width: 320px;
+    border-radius: 0.75rem;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.card_title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.button {
+    color: #fff;
+    width: 220px;
+    border: none;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #2563eb;
+}
+
+.button:hover {
+    background-color: #1e40af;
+    transition-duration: 0.3s;
+}

@@ -1,0 +1,26 @@
+.page {
+    margin: 0 auto;
+    max-width: 640px;
+    min-height: 100vh;
+    padding: 0 1rem;
+}
+
+.header {
+    gap: 0.75rem;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.back {
+    color: #4b5563;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.title {
+    margin: 0 0.5rem;
+    font-weight: 500;
+    font-size: 1.4rem;
+    letter-spacing: -0.03rem;
+}

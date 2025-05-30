@@ -1,0 +1,163 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+}
+
+.group {
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.group input,
+.group textarea,
+.group select {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.group input {
+    flex: 1
+}
+
+.group textarea {
+    height: 5rem;
+    overflow-y: auto;
+    resize: vertical;
+    max-height: 400px;
+    font-size: 0.75rem;
+}
+
+.group textarea::placeholder {
+    letter-spacing: -0.03rem;
+}
+
+.group label {
+    font-size: 0.9rem;
+    margin-left: 0.15rem;
+}
+
+.inline {
+    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.inline span {
+    color: #333;
+}
+
+.required {
+    font-size: 0.875rem;
+    color: rgb(239, 68, 68);
+}
+
+.final_box {
+    opacity: 0;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    background: #eff6ff;
+    animation: fadeSlideIn 0.5s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.final_row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.align_end {
+    align-items: self-end;
+}
+
+.align_center {
+    align-items: center;
+}
+
+.final_label {
+    margin: 0;
+    font-weight: 500;
+}
+
+.price_line {
+    display: flex;
+    text-align: right;
+    flex-flow: column;
+}
+
+.original_price {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    text-decoration: line-through;
+}
+
+.final_price {
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.discount_info {
+    color: #dc2626;
+    margin: 0.25rem 0;
+    text-align: right;
+    font-size: 0.75rem;
+}
+
+.submit {
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 0.7rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    margin-top: 0.7rem;
+    background: #2563eb;
+    transition: background 0.2s;
+}
+
+.submit:hover {
+    background-color: #1e40af;
+    transition-duration: 0.3s;
+}
+
+
+.submit:disabled {
+    background: #cbd5e1;
+    cursor: not-allowed;
+}
+
+.validation {
+    padding: 1rem;
+    list-style: none;
+    border-radius: 8px;
+    background: #f1f5f9;
+    font-size: 0.875rem;
+}
+
+.validation li {
+    margin-bottom: 0.5rem;
+}
+
+.valid {
+    color: #16a34a;
+}
+
+.invalid {
+    color: rgb(107, 114, 128);
+}

@@ -1,0 +1,75 @@
+.layout {
+    background-color: rgb(249, 250, 251);
+}
+
+.page {
+    margin: 0 auto;
+    max-width: 80rem;
+    padding: 0 1rem 2rem 1rem;
+}
+
+.container {
+    display: flex;
+    margin-bottom: 0.7rem;
+    justify-content: space-between;
+}
+
+.container div {
+    gap: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.left h2 {
+    font-weight: 500;
+    font-size: 1.4rem;
+    letter-spacing: -0.03rem;
+}
+
+.view {
+    font-size: 0.875rem;
+    margin-left: 0.75rem;
+    color: rgb(75, 85, 99);
+}
+
+.fix {
+    border: none;
+    line-height: 1rem;
+    font-size: 0.7rem;
+    border-radius: 0.75rem;
+    padding: 0.2rem 0.45rem;
+    color: rgb(37, 99, 235);
+    background-color: rgb(219, 234, 254);
+}
+
+.button {
+    color: #fff;
+    gap: 0.5rem;
+    border: none;
+    display: flex;
+    font-size: 0.85rem;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.2rem;
+    background-color: #2563eb;
+}
+
+.button:hover {
+    background-color: #1e40af;
+    transition-duration: 0.3s;
+}
+
+
+.list {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid {
+    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+}

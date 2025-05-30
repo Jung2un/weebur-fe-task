@@ -1,0 +1,9 @@
+.icon {
+    width: 12px;
+    margin-right: 0.35rem;
+    transform: translateY(0.1rem);
+}
+
+.transY {
+    transform: translateY(0.125rem);
+}
