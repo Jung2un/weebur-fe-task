@@ -6,6 +6,7 @@ import style from "./page.module.css";
 export const metadata: Metadata = {
   title: "WEEBUR",
   description: "FE 코딩과제",
+  metadataBase: new URL("https://weebur-fe-task.vercel.app"),
   openGraph: {
     title: "WEEBUR",
     description: "FE 코딩과제",

@@ -9,6 +9,7 @@ import ProductCard from "@/components/ProductCard";
 export const metadata: Metadata = {
   title: "상품 목록",
   description: "상품 리스트 페이지",
+  metadataBase: new URL("https://weebur-fe-task.vercel.app"),
   openGraph: {
     title: "상품 목록",
     description: "상품 리스트 페이지",

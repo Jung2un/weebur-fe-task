@@ -7,6 +7,7 @@ import ProductForm from "@/components/ProductForm";
 export const metadata: Metadata = {
   title: "상품 생성",
   description: "상품 생성 페이지",
+  metadataBase: new URL("https://weebur-fe-task.vercel.app"),
   openGraph: {
     title: "상품 생성",
     description: "상품 생성 페이지",
