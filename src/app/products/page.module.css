@@ -5,6 +5,7 @@
 .page {
     margin: 0 auto;
     max-width: 80rem;
+    min-height: 95vh;
     padding: 0 1rem 2rem 1rem;
 }
 

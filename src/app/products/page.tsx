@@ -4,7 +4,8 @@ import style from "./page.module.css";
 import { cookies } from "next/headers";
 import { PlusIcon } from "@/components/Icon";
 import { ProductsParams } from "@/types/product";
-import ProductCard from "@/components/ProductCard";
+import ProductList from "@/components/ProductList";
+import {notFound} from "next/navigation";
 
 export const metadata: Metadata = {
   title: "상품 목록",
@@ -22,7 +23,7 @@ export default async function Page() {
   });
 
   if (!res.ok) {
-    return <div>상품 데이터를 불러오지 못했습니다 다시 시도해주세요</div>;
+    notFound();
   }
 
   const data = await res.json();
@@ -47,13 +48,7 @@ export default async function Page() {
           </Link>
         </div>
       </div>
-
-      <div className={`${viewMode === "list" ? style.list : style.grid}`}>
-        {viewMode &&
-          products.map((item) => (
-            <ProductCard key={item.id} product={item} viewMode={viewMode} />
-          ))}
-      </div>
+      {viewMode && <ProductList products={products} viewMode={viewMode} />}
     </div>
   );
 }

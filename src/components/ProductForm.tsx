@@ -1,10 +1,10 @@
 "use client";
 
-import React, {useCallback, useState} from "react";
 import { useRouter } from "next/navigation";
 import style from "./ProductForm.module.css";
 import { AddProduct } from "@/types/addProduct";
 import { CheckIcon, CrossIcon } from "@/components/Icon";
+import React, { useState, useActionState, useCallback, useTransition } from "react";
 
 export default function ProductForm() {
   const [name, setName] = useState(""); // 상품명
@@ -12,10 +12,11 @@ export default function ProductForm() {
   const [price, setPrice] = useState(""); // 가격
   const [discount, setDiscount] = useState(""); // 할인율
   const [brand, setBrand] = useState(""); // 브랜드
+  const [, startTransition] = useTransition();
+  const router = useRouter();
+
   const brandType = ['Apple', 'Samsung', 'Weebur'] as const;
   type Brand = typeof brandType[number];
-
-  const router = useRouter();
 
   // 화면 유효성
   const isValid = {
@@ -63,14 +64,14 @@ export default function ProductForm() {
   // API 호출
   const submitProduct = useCallback(async (payload: AddProduct) => {
     try {
-      const response = await fetch('https://dummyjson.com/products/add', {
+      const res = await fetch('https://dummyjson.com/products/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
 
       router.push('/products');
@@ -80,21 +81,40 @@ export default function ProductForm() {
     }
   }, [router]);
 
+  // state 업데이트 hook 사용
+  const [, submitAction, isPending] = useActionState(
+    async (_: void | null, formData: FormData) => {
+      const formName = formData.get("name") as string;
+      const formDesc = formData.get("desc") as string;
+      const formPrice = formData.get("price") as string;
+      const formDiscount = formData.get("discount") as string;
+      const formBrand = formData.get("brand") as string;
+
+      if (!validateFormData()) return;
+
+      const payload: AddProduct = {
+        title: formName,
+        description: formDesc || undefined,
+        price: Number(formPrice),
+        discountPercentage: formDiscount ? Number(formDiscount) : undefined,
+        brand: formBrand as Brand,
+      };
+
+      await submitProduct(payload);
+    },
+    null
+  );
+
   // 폼 제출 핸들러
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validateFormData()) return;
+    const formData = new FormData(e.currentTarget);
 
-    const payload: AddProduct = {
-      title: name,
-      description: desc || undefined,
-      price: Number(price),
-      discountPercentage: discount ? Number(discount) : undefined,
-      brand: brand as Brand,
-    };
-
-    await submitProduct(payload);
+    startTransition(() => {
+      submitAction(formData);
+    });
   };
+
 
   // 최종 가격 계산
   const finalPrice = (): number => {
@@ -110,6 +130,7 @@ export default function ProductForm() {
         <label>상품명 <span className={style.required}>*</span></label>
         <input
           type="text"
+          name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="상품명을 입력하세요"
@@ -119,6 +140,7 @@ export default function ProductForm() {
       <div className={style.group}>
         <label>상품 설명</label>
         <textarea
+          name="desc"
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
           placeholder="상품에 대한 설명을 입력해주세요"
@@ -130,6 +152,7 @@ export default function ProductForm() {
         <div className={style.inline}>
           <input
             type="number"
+            name="price"
             value={price}
             placeholder="1000"
             onChange={(e) => setPrice(e.target.value)}
@@ -143,6 +166,7 @@ export default function ProductForm() {
         <div className={style.inline}>
           <input
             type="number"
+            name="discount"
             value={discount}
             placeholder="0"
             onChange={(e) => setDiscount(e.target.value)}
@@ -153,7 +177,11 @@ export default function ProductForm() {
 
       <div className={style.group}>
         <label>브랜드 <span className={style.required}>*</span></label>
-        <select value={brand} onChange={(e) => setBrand(e.target.value)}>
+        <select
+          name="brand"
+          value={brand}
+          onChange={(e) => setBrand(e.target.value)}
+        >
           <option value="">브랜드를 선택해주세요</option>
           <option value="Apple">Apple</option>
           <option value="Samsung">Samsung</option>
@@ -178,8 +206,8 @@ export default function ProductForm() {
         </div>
       )}
 
-      <button type="submit" className={style.submit} disabled={!canSubmit}>
-        상품 생성하기
+      <button type="submit" className={style.submit} disabled={!canSubmit || isPending}>
+        {isPending ? "상품 생성 중..." : "상품 생성하기"}
       </button>
 
       <ul className={style.validation}>
